@@ -157,7 +157,7 @@ class Asistente(models.Model):
     Datos_personales = models.OneToOneField(Datos_personales, null=True, blank=True, on_delete=models.CASCADE)
     Direccion = models.ForeignKey(Direccion, null=True, blank=True, on_delete=models.CASCADE)
     Telefono = models.ForeignKey(Telefono, null=True, blank=True, on_delete=models.CASCADE)
-    Contraseña = models.ForeignKey(Contraseña, null=True, blank=True, on_delete=models.CASCADE)
+    Contraseña = models.OneToOneField(Contraseña, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Consulta(models.Model):
@@ -202,7 +202,7 @@ class Doctor(models.Model):
     Horario = models.ForeignKey(Horario, null=True, blank=True, on_delete=models.CASCADE)
     Servicio_externo = models.ForeignKey(Servicio_externo, null=True, blank=True, on_delete=models.CASCADE)
     Telefono = models.ForeignKey(Telefono, null=True, blank=True, on_delete=models.CASCADE)
-    Contraseña = models.ForeignKey(Contraseña, null=True, blank=True, on_delete=models.CASCADE)
+    Contraseña = models.OneToOneField(Contraseña, null=True, blank=True, on_delete=models.CASCADE)
     Direccion = models.OneToOneField(Direccion, null=True, blank=True, on_delete=models.CASCADE)
     Datos_personales = models.OneToOneField(Datos_personales, null=True, blank=True, on_delete=models.CASCADE)
     Paciente = models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
