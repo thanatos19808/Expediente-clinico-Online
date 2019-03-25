@@ -1,0 +1,13 @@
+from django.contrib import admin
+from .models import Doctor, Facturacion_datos_doctor,Consultorio,Especialidad,Consulta_campos conf,Expediente_conf,Cita_externa,Horario,Servicio externo,Telefono,Contraseña,Direccion,Datos personales,Paciente,Asistente
+
+
+class MedAdmin(admin.ModelAdmin):
+    list_display = ["cedula"]
+    search_fields = ["cedula"]
+    class Meta:
+        model = Doctor
+
+
+admin.site.register(Doctor, Facturacion_datos_doctor,Consultorio,Especialidad,Consulta_campos conf,Expediente_conf,Cita_externa,Horario,Servicio externo,Telefono,Contraseña,Direccion,Datos personales,Paciente,Asistente,MedAdmin)
+
