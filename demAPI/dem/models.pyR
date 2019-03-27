@@ -23,9 +23,6 @@ class Doctor(models.Model):
     def __str__(self):
         return '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
 
-    class Meta:
-        verbose_name_plural = "Doctores"
-
 
 class Paciente(models.Model):
     nombre = models.CharField(max_length=90,null=True, blank=False)
@@ -53,9 +50,6 @@ class Paciente(models.Model):
     def __str__(self):
         return '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
 
-    class Meta:
-        verbose_name_plural = "Pacientes"
-
 
 class Consulta(models.Model):
     fecha_consulta = models.DateField(null=True, blank=False)
@@ -70,9 +64,6 @@ class Consulta(models.Model):
 
     def __str__(self):
         return '%s %s %s %s %s %s' % (self.fecha_consulta, self.hora, self.consultorio, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
-
-    class Meta:
-        verbose_name_plural = "Consultas"
 
 
 class Asistente(models.Model):
@@ -96,10 +87,7 @@ class Asistente(models.Model):
     Doctor = models.ForeignKey(Doctor, null=True, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
-
-    class Meta:
-        verbose_name_plural = "Asistentes"
+        return '%s %s %s %s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno, self.Doctor.nombre, self.Doctor.apellido_paterno, self.Doctor.apellido_materno)
 
 
 class Acompañante(models.Model):
@@ -120,10 +108,7 @@ class Acompañante(models.Model):
     Paciente = models.ForeignKey(Paciente, null=True, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s %s' % (self.relacion, self.nombre, self.apellido_paterno)
-
-    class Meta:
-        verbose_name_plural = "Acompañantes"
+        return '%s %s %s %s %s %s %s' % (self.relacion, self.nombre, self.apellido_paterno, self.apellido_materno, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
 
 class Facturacion_datos_doctor(models.Model):
@@ -134,11 +119,6 @@ class Facturacion_datos_doctor(models.Model):
     tipo_comprobante = models.CharField(max_length=90,null=True, blank=False)
     Doctor = models.OneToOneField(Doctor, null=True, blank=False, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return '%s %s %s %s' % (self.rfc, self.Doctor.nombre, self.Doctor.apellido_paterno, self.Doctor.apellido_materno)
-
-    class Meta:
-        verbose_name_plural = "Doctor - Datos de facturación"
 
 
 class Consultorio(models.Model):
@@ -156,9 +136,6 @@ class Consultorio(models.Model):
     def __str__(self):
         return '%s %s' % (self.nombre_consultorio, self.alias_consultorio)
 
-    class Meta:
-        verbose_name_plural = "Consultorios"
-
 
 class Especialidad(models.Model):
     nombre_especialidad = models.CharField(max_length=45,null=True, blank=False)
@@ -166,9 +143,6 @@ class Especialidad(models.Model):
 
     def __str__(self):
         return '%s %s %s %s' % (self.nombre_especialidad, self.Doctor.nombre, self.Doctor.apellido_paterno, self.Doctor.apellido_materno)
-
-    class Meta:
-        verbose_name_plural = "Especialidades"
 
 
 class Consulta_campos_conf(models.Model):
@@ -205,9 +179,6 @@ class Cita_externa(models.Model):
     def __str__(self):
         return '%s %s %s %s %s %s' % (self.fecha_cita, self.hora_inicio, self.hora_final, self.Doctor.nombre, self.Doctor.apellido_paterno, self.Doctor.apellido_materno)
 
-    class Meta:
-        verbose_name_plural = "Citas Externas"
-
 
 class Horario(models.Model):
     dia = models.CharField(max_length=3,null=True, blank=False)
@@ -218,58 +189,19 @@ class Horario(models.Model):
     def __str__(self):
         return '%s' % (self.dia)
 
-    class Meta:
-        verbose_name_plural = "Horarios"
 
-class Telefono_doctor(models.Model):
+
+class Telefono(models.Model):
     tipo = models.CharField(max_length=3,null=True, blank=False)
     lada = models.CharField(max_length=3,null=True, blank=False)
     telefono = models.CharField(max_length=10,null=True, blank=False)
-    Doctor = models.ForeignKey(Doctor, null=True, blank=False, on_delete=models.CASCADE)
+    Doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
+    Asistente = models.ForeignKey(Asistente, null=True, blank=True, on_delete=models.CASCADE)
+    Acompañante = models.ForeignKey(Acompañante, null=True, blank=True, on_delete=models.CASCADE)
+    Paciente = models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s %s' % (self.tipo, self.lada, self.telefono)
-
-    class Meta:
-        verbose_name_plural = "Doctores - Telefonos"
-
-class Telefono_paciente(models.Model):
-    tipo = models.CharField(max_length=3,null=True, blank=False)
-    lada = models.CharField(max_length=3,null=True, blank=False)
-    telefono = models.CharField(max_length=10,null=True, blank=False)
-    Paciente = models.ForeignKey(Paciente, null=True, blank=False, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return '%s %s %s' % (self.tipo, self.lada, self.telefono)
-
-    class Meta:
-        verbose_name_plural = "Pacientes - Telefonos"
-
-
-class Telefono_asistente(models.Model):
-    tipo = models.CharField(max_length=3,null=True, blank=False)
-    lada = models.CharField(max_length=3,null=True, blank=False)
-    telefono = models.CharField(max_length=10,null=True, blank=False)
-    Asistente = models.ForeignKey(Asistente, null=True, blank=False, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return '%s %s %s' % (self.tipo, self.lada, self.telefono)
-
-    class Meta:
-        verbose_name_plural = "Asistentes - Telefonos"
-
-
-class Telefono_acompañante(models.Model):
-    tipo = models.CharField(max_length=3,null=True, blank=False)
-    lada = models.CharField(max_length=3,null=True, blank=False)
-    telefono = models.CharField(max_length=10,null=True, blank=False)
-    Acompañante = models.ForeignKey(Acompañante, null=True, blank=False, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return '%s %s %s' % (self.tipo, self.lada, self.telefono)
-
-    class Meta:
-        verbose_name_plural = "Acompañantes - Telefonos"
+        return '%s %s %s' % (self.telefono)
 
 
 class Alergia(models.Model):
@@ -279,9 +211,6 @@ class Alergia(models.Model):
     def __str__(self):
         return '%s %s %s %s' % (self.alergia, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
-    class Meta:
-        verbose_name_plural = "Alergias"
-
 
 class Antecedentes(models.Model):
     descripcion = models.CharField(max_length=200,null=True, blank=False)
@@ -289,9 +218,6 @@ class Antecedentes(models.Model):
 
     def __str__(self):
         return '%s %s %s %s' % (self.descripcion, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
-
-    class Meta:
-        verbose_name_plural = "Antecedentes"
 
 
 class Expediente(models.Model):
@@ -318,9 +244,6 @@ class Facturacion_datos_paciente(models.Model):
     def __str__(self):
         return '%s %s %s %s' % (self.rfc, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
-    class Meta:
-        verbose_name_plural = "Paciente - Datos de Facturación"
-
 
 class Diagnostico(models.Model):
     clave = models.CharField(max_length=4,null=True, blank=True)
@@ -331,13 +254,10 @@ class Diagnostico(models.Model):
 
 
 class Estudio(models.Model):
-    nombre_estudio = models.CharField(max_length=90,null=True, blank=False)
-    fecha_estudio = models.DateField(null=True, blank=False)
+    nombre_carpeta = models.CharField(max_length=90,null=True, blank=False)
+    fecha_estudios = models.DateField(null=True, blank=False)
     url_archivo = models.CharField(max_length=90,null=True, blank=False)
-    Paciente = models.ForeignKey(Paciente, null=True, blank=False, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return '%s %s %s %s %s' % (self.nombre_estudio, self.fecha_estudio,  self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
+    Consulta = models.ForeignKey(Consulta, null=True, blank=False, on_delete=models.CASCADE)
 
 
 class Receta(models.Model):
@@ -360,12 +280,8 @@ class Pago(models.Model):
     monto = models.IntegerField(null=True, blank=False)
     forma_pago = models.CharField(max_length=4,null=True, blank=False)
     factura_pago = models.CharField(max_length=200,null=True, blank=False)
-    pago_consulta = models.BooleanField(default=False,null=True, blank=True)
-    id_consulta = models.CharField(max_length=200,null=True, blank=True)
-    Doctor = models.ForeignKey(Doctor, null=True, blank=False, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name_plural = "Pagos"
+    Consulta = models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
+    Doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Consulta_campos(models.Model):
