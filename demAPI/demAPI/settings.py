@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['104.248.176.189']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'foreignkeysearch',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -103,6 +104,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+#Rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
+
 
 
 # Internationalization
