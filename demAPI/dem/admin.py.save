@@ -324,6 +324,7 @@ class PagoAdmin(admin.ModelAdmin):
         model = Telefono_doctor
 
 admin.site.site_header = 'TOP MEDICAL'
+admin.site.site_name
 admin.site.register(Doctor,DoctorAdmin)
 admin.site.register(Facturacion_datos_doctor, Facturacion_datos_doctorAdmin)
 admin.site.register(Consultorio, ConsultorioAdmin)

@@ -6,7 +6,7 @@ class Doctor(models.Model):
     apellido_paterno = models.CharField(max_length=45,null=True, blank=False)
     apellido_materno = models.CharField(max_length=45,null=True, blank=False)
     sexo = models.CharField(max_length=1,null=True, blank=False)
-    correo = models.CharField(max_length=45,null=True, blank=True)
+    correo = models.EmailField(max_length=45,null=True, blank=True)
     rfc = models.CharField(max_length=45,null=True, blank=True)
     fecha_nacimiento = models.DateField(null=True, blank=False)
     url_foto = models.CharField(max_length=90,null=True, blank=True)
@@ -32,7 +32,7 @@ class Paciente(models.Model):
     apellido_paterno = models.CharField(max_length=45,null=True, blank=False)
     apellido_materno = models.CharField(max_length=45,null=True, blank=False)
     sexo = models.CharField(max_length=1,null=True, blank=False)
-    correo = models.CharField(max_length=45,null=True, blank=True)
+    correo = models.EmailField(max_length=45,null=True, blank=True)
     rfc = models.CharField(max_length=45,null=True, blank=True)
     fecha_nacimiento = models.DateField(null=True, blank=True)
     url_foto = models.CharField(max_length=90,null=True, blank=True)
@@ -48,7 +48,10 @@ class Paciente(models.Model):
     cp = models.CharField(max_length=5,null=True, blank=True)
     estado = models.CharField(max_length=45,null=True, blank=True)
     municipio = models.CharField(max_length=45,null=True, blank=True)
-    Doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
+    estado_nacimiento = models.CharField(max_length=45,null=True, blank=True)
+    municipio_nacimiento = models.CharField(max_length=45,null=True, blank=True)
+    monoclave = models.CharField(max_length=45,null=True, blank=True)
+    Doctor = models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
@@ -72,7 +75,7 @@ class Consulta(models.Model):
         return '%s %s %s %s %s %s' % (self.fecha_consulta, self.hora, self.consultorio, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
     class Meta:
-        verbose_name_plural = "Consultas"
+        verbose_name_plural = "Pacientes - Consultas"
 
 
 class Asistente(models.Model):
@@ -80,7 +83,7 @@ class Asistente(models.Model):
     apellido_paterno = models.CharField(max_length=45,null=True, blank=False)
     apellido_materno = models.CharField(max_length=45,null=True, blank=False)
     sexo = models.CharField(max_length=1,null=True, blank=False)
-    correo = models.CharField(max_length=45,null=True, blank=True)
+    correo = models.EmailField(max_length=45,null=True, blank=True)
     rfc = models.CharField(max_length=45,null=True, blank=True)
     fecha_nacimiento = models.DateField(null=True, blank=True)
     url_foto = models.CharField(max_length=90,null=True, blank=True)
@@ -107,7 +110,7 @@ class Acompañante(models.Model):
     apellido_paterno = models.CharField(max_length=45,null=True, blank=False)
     apellido_materno = models.CharField(max_length=45,null=True, blank=False)
     sexo = models.CharField(max_length=1,null=True, blank=False)
-    correo = models.CharField(max_length=45,null=True, blank=True)
+    correo = models.EmailField(max_length=45,null=True, blank=True)
     rfc = models.CharField(max_length=45,null=True, blank=True)
     fecha_nacimiento = models.DateField(null=True, blank=True)
     url_foto = models.CharField(max_length=90,null=True, blank=True)
@@ -138,7 +141,7 @@ class Facturacion_datos_doctor(models.Model):
         return '%s %s %s %s' % (self.rfc, self.Doctor.nombre, self.Doctor.apellido_paterno, self.Doctor.apellido_materno)
 
     class Meta:
-        verbose_name_plural = "Doctor - Datos de facturación"
+        verbose_name_plural = "Doctores - Datos de facturación"
 
 
 class Consultorio(models.Model):
@@ -157,7 +160,7 @@ class Consultorio(models.Model):
         return '%s %s' % (self.nombre_consultorio, self.alias_consultorio)
 
     class Meta:
-        verbose_name_plural = "Consultorios"
+        verbose_name_plural = "Doctores - Consultorios"
 
 
 class Especialidad(models.Model):
@@ -168,7 +171,7 @@ class Especialidad(models.Model):
         return '%s %s %s %s' % (self.nombre_especialidad, self.Doctor.nombre, self.Doctor.apellido_paterno, self.Doctor.apellido_materno)
 
     class Meta:
-        verbose_name_plural = "Especialidades"
+        verbose_name_plural = "Doctores - Especialidades"
 
 
 class Consulta_campos_conf(models.Model):
@@ -206,7 +209,7 @@ class Cita_externa(models.Model):
         return '%s %s %s %s %s %s' % (self.fecha_cita, self.hora_inicio, self.hora_final, self.Doctor.nombre, self.Doctor.apellido_paterno, self.Doctor.apellido_materno)
 
     class Meta:
-        verbose_name_plural = "Citas Externas"
+        verbose_name_plural = "Doctores - Citas Externas"
 
 
 class Horario(models.Model):
@@ -219,7 +222,7 @@ class Horario(models.Model):
         return '%s' % (self.dia)
 
     class Meta:
-        verbose_name_plural = "Horarios"
+        verbose_name_plural = "Doctores - Horarios"
 
 class Telefono_doctor(models.Model):
     tipo = models.CharField(max_length=3,null=True, blank=False)
@@ -280,7 +283,7 @@ class Alergia(models.Model):
         return '%s %s %s %s' % (self.alergia, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
     class Meta:
-        verbose_name_plural = "Alergias"
+        verbose_name_plural = "Pacientes - Alergias"
 
 
 class Antecedentes(models.Model):
@@ -291,7 +294,7 @@ class Antecedentes(models.Model):
         return '%s %s %s %s' % (self.descripcion, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
     class Meta:
-        verbose_name_plural = "Antecedentes"
+        verbose_name_plural = "Pacientes - Antecedentes"
 
 
 class Expediente(models.Model):
@@ -319,7 +322,7 @@ class Facturacion_datos_paciente(models.Model):
         return '%s %s %s %s' % (self.rfc, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
     class Meta:
-        verbose_name_plural = "Paciente - Datos de Facturación"
+        verbose_name_plural = "Pacientes - Datos de Facturación"
 
 
 class Diagnostico(models.Model):
@@ -338,6 +341,9 @@ class Estudio(models.Model):
 
     def __str__(self):
         return '%s %s %s %s %s' % (self.nombre_estudio, self.fecha_estudio,  self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
+
+    class Meta:
+        verbose_name_plural = "Pacientes - Estudios"
 
 
 class Receta(models.Model):
@@ -365,7 +371,7 @@ class Pago(models.Model):
     Doctor = models.ForeignKey(Doctor, null=True, blank=False, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name_plural = "Pagos"
+        verbose_name_plural = "Doctores - Pagos"
 
 
 class Consulta_campos(models.Model):
