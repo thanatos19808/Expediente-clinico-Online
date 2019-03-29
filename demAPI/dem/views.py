@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from .models import Doctor
 from .serializers import DoctorSerializer
 from django.db.models import Q
@@ -12,6 +13,8 @@ from rest_framework.generics import (
 
 
 class doctorCedulaSearch(ListAPIView):
+    permission_classes = (IsAuthenticated,)
+
     serializer_class = DoctorSerializer
     def get_queryset(self, *args, **kwargs):
         queryset_list = Doctor.objects.all()
@@ -26,6 +29,8 @@ class doctorCedulaSearch(ListAPIView):
 
 
 class doctorNombreSearch(ListAPIView):
+    permission_classes = (IsAuthenticated,)
+
     serializer_class = DoctorSerializer
     def get_queryset(self, *args, **kwargs):
         queryset_list = Doctor.objects.all()
