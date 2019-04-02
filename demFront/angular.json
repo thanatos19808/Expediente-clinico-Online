@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "demFRONT": {
+    "demFront": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demFRONT",
+            "outputPath": "dist/demFront",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -58,18 +58,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demFRONT:build"
+            "browserTarget": "demFront:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "demFRONT:build:production"
+              "browserTarget": "demFront:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "demFRONT:build"
+            "browserTarget": "demFront:build"
           }
         },
         "test": {
@@ -103,7 +103,7 @@
         }
       }
     },
-    "demFRONT-e2e": {
+    "demFront-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -112,11 +112,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "demFRONT:serve"
+            "devServerTarget": "demFront:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "demFRONT:serve:production"
+              "devServerTarget": "demFront:serve:production"
             }
           }
         },
@@ -132,5 +132,5 @@
       }
     }
   },
-  "defaultProject": "demFRONT"
+  "defaultProject": "demFront"
 }
