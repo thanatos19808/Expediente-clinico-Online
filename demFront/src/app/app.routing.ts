@@ -13,6 +13,7 @@ import { ErrorComponent} from './view/error/error.component';
 
 //Array de Rutas
 const appRoutes: Routes = [
+    {path: '', component: MenuInicioComponent},
     {path: 'login', component: LoginComponent},
     {path: 'inicio', component: MenuInicioComponent},
     {path: 'agenda', component: MenuAgendaComponent},

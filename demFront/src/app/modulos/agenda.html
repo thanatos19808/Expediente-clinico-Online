@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es-MX" >
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda - Django Expediente</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="css/menu-principal.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href='css/calendario.css' rel='stylesheet' />
+    <link href='css/agenda.css' rel='stylesheet' />
+</head>
+
+<body class="sidebar-is-reduced">
+  <div class="c-header-nombre d-block d-sm-none b-c1">
+        <p>Dr. Ricardo Eliécer Neftalí Reyes Basoalto</p>
+  </div>
+  <div class="c-search d-sm-block d-md-none b-c2">
+        <input class="c-search__input u-input b-c3 c-c2" placeholder="Buscar paciente..." type="text"/>
+        <span class="fas fa-search fa-2x c-c2 bf-c2 bh-c5 ch-c3"></span>
+      </div>
+  <header class="l-header b-c2">
+    <div class="l-header__inner clearfix">
+      <div class="c-header-icon js-hamburger b-c2 bh-c5">
+        <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
+      </div>      
+      <div class="c-search d-none d-md-block b-c2">
+        <input class="c-search__input u-input b-c3 c-c2" placeholder="Buscar paciente..." type="text"/>
+        <span class="fas fa-search fa-2x c-c2 bf-c1 bh-c5 ch-c3"></span>
+      </div>
+      <div class="c-header-nombre d-none d-sm-block b-c1">
+        <p>Dr. Ricardo Eliécer Neftalí<br>Reyes Basoalto</p>
+      </div>
+      <div class="c-img-dr">
+        <img class="img-fluid" src="img/placeholder-doctor.jpg">
+      </div>
+      <div class="header-icons-group">
+        <div class="c-header-icon logout b-c3"><span class="fas fa-power-off fa-2x b-c1 bh-c4"></span></div>        
+      </div>
+    </div>
+  </header>
+  <div class="l-sidebar b-c2">
+    <div class="logo b-c3">
+      <img src="img/placeholder.png">
+    </div>
+    <div class="l-sidebar__content">
+      <nav class="c-menu js-menu">
+        <ul class="u-list">
+          <li class="c-menu__item is-active" data-toggle="tooltip" title="Agenda">
+            <div class="c-menu__item__inner b-c2"><span class="fas fa-2x fa-address-book c-c3"></span>
+              <div class="c-menu-item__title"><span class="c-c3">Agenda</span></div>
+            </div>
+          </li>
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pacientes">
+            <div class="c-menu__item__inner b-c2"><span class="fas fa-2x fa-users c-c3"></span>
+              <div class="c-menu-item__title"><span class="c-c3">Pacientes</span></div>
+            </div>
+          </li>
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Pagos">
+            <div class="c-menu__item__inner b-c2"><span class="fas fa-2x fa-receipt c-c3"></span>
+              <div class="c-menu-item__title"><span class="c-c3">Pagos</span></div>
+            </div>
+          </li>
+          <li class="c-menu__item has-submenu" data-toggle="tooltip" title="Ajustes">
+            <div class="c-menu__item__inner b-c2"><span class="fas fa-2x fa-user-cog c-c3"></span>
+              <div class="c-menu-item__title"><span class="c-c3">Ajustes</span></div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+<main class="l-main">
+  <div class="content-wrapper content-wrapper--with-bg">
+    <div id='calendar'></div>
+  </div>
+</main>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+  "use strict";
+var Dashboard = function () {
+  var global = {
+    tooltipOptions: {
+      placement: "right"
+    },
+    menuClass: ".c-menu"
+  };
+
+  var menuChangeActive = function menuChangeActive(el) {
+    var hasSubmenu = $(el).hasClass("has-submenu");
+    $(global.menuClass + " .is-active").removeClass("is-active");
+    $(el).addClass("is-active");
+
+    if (hasSubmenu) {
+    $(el).find("ul").slideDown();
+    }
+  };
+
+  var sidebarChangeWidth = function sidebarChangeWidth() {
+    var $menuItemsTitle = $("li .menu-item__title");
+
+    $("body").toggleClass("sidebar-is-reduced sidebar-is-expanded");
+    $(".hamburger-toggle").toggleClass("is-opened");
+
+    if ($("body").hasClass("sidebar-is-expanded")) {
+      $('[data-toggle="tooltip"]').tooltip("destroy");
+    } else {
+      $('[data-toggle="tooltip"]').tooltip(global.tooltipOptions);
+    }
+  };
+
+  return {
+    init: function init() {
+      $(".js-hamburger").on("click", sidebarChangeWidth);
+
+      $(".js-menu li").on("click", function (e) {
+        menuChangeActive(e.currentTarget);
+      });
+
+      $('[data-toggle="tooltip"]').tooltip(global.tooltipOptions);
+    }
+  };
+}();
+Dashboard.init();
+</script>
+<script src='js/calendario.js'></script>
+<script src='js/agenda.js'></script>
+</body></html>
