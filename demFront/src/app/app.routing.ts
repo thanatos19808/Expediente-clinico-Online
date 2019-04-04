@@ -8,8 +8,8 @@ import { MenuAgendaComponent} from './view/menu-agenda/menu-agenda.component';
 import { MenuAjustesComponent} from './view/menu-ajustes/menu-ajustes.component';
 import { MenuInicioComponent} from './view/menu-inicio/menu-inicio.component';
 import { MenuPacientesComponent} from './view/menu-pacientes/menu-pacientes.component';
-import { MenuPagoComponent} from './view/menu-pago/menu-pago.component'; 
-import { ErrorComponent} from './view/error/error.component'; 
+import { MenuPagoComponent} from './view/menu-pago/menu-pago.component';
+import { ErrorComponent} from './view/error/error.component';
 
 //Array de Rutas
 const appRoutes: Routes = [
@@ -26,3 +26,5 @@ const appRoutes: Routes = [
 // exportar modulo de router
 export const RoutingProviders: any[] = [];
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+
+

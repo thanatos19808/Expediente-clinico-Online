@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'menu-ajustes',
   templateUrl: './menu-ajustes.component.html',
-  styleUrls: ['./menu-ajustes.component.css']
+  styleUrls: ['./menu-ajustes.component.scss']
 })
 export class MenuAjustesComponent implements OnInit {
 
