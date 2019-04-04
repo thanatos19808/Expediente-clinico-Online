@@ -17,9 +17,6 @@
       "es2018",
       "dom"
     ],
-    "types": [
-      "jquery"
-    ],
     "paths": {
       "angular-bootstrap-md": [
         "dist/angular-bootstrap-md"
