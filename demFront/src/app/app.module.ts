@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { routing, RoutingProviders} from './app.routing';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './view/error/error.component';
@@ -27,12 +28,13 @@ import { MenuComponent } from './component/menu/menu.component';
     MenuPagoComponent,
     CalendarioComponent,
     ListaComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
-    routing
+    routing,
+    DataTablesModule,
   ],
   providers: [
     RoutingProviders
