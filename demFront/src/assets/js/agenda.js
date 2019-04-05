@@ -1,4 +1,3 @@
-/**/
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
@@ -10,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
         center: 'title',
         right: 'dayGridMonth,dayGridWeek,dayGridDay'
       },
-      navLinks: true, // can click day/week names to navigate views
+      navLinks: true, 
       editable: true,
-      eventLimit: true, // allow "more" link when too many events
+      eventLimit: true, 
       events: [
         {
           title: 'All Day Event',

@@ -1,0 +1,167 @@
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = global || self, factory(global.FullCalendar = {}));
+}(this, function (exports) { 'use strict';
+
+    
+    
+    var elementPropHash = {
+        className: true,
+        colSpan: true,
+        rowSpan: true
+    };
+    var containerTagHash = {
+        '<tr': 'tbody',
+        '<td': 'tr'
+    };
+    function createElement(tagName, attrs, content) {
+        var el = document.createElement(tagName);
+        if (attrs) {
+            for (var attrName in attrs) {
+                if (attrName === 'style') {
+                    applyStyle(el, attrs[attrName]);
+                }
+                else if (elementPropHash[attrName]) {
+                    el[attrName] = attrs[attrName];
+                }
+                else {
+                    el.setAttribute(attrName, attrs[attrName]);
+                }
+            }
+        }
+        if (typeof content === 'string') {
+            el.innerHTML = content; 
+        }
+        else if (content != null) {
+            appendToElement(el, content);
+        }
+        return el;
+    }
+    function htmlToElement(html) {
+        html = html.trim();
+        var container = document.createElement(computeContainerTag(html));
+        container.innerHTML = html;
+        return container.firstChild;
+    }
+    function htmlToElements(html) {
+        return Array.prototype.slice.call(htmlToNodeList(html));
+    }
+    function htmlToNodeList(html) {
+        html = html.trim();
+        var container = document.createElement(computeContainerTag(html));
+        container.innerHTML = html;
+        return container.childNodes;
+    }
+    
+    function computeContainerTag(html) {
+        return containerTagHash[html.substr(0, 3) 
+        ] || 'div';
+    }
+    function appendToElement(el, content) {
+        var childNodes = normalizeContent(content);
+        for (var i = 0; i < childNodes.length; i++) {
+            el.appendChild(childNodes[i]);
+        }
+    }
+    function prependToElement(parent, content) {
+        var newEls = normalizeContent(content);
+        var afterEl = parent.firstChild || null; 
+        for (var i = 0; i < newEls.length; i++) {
+            parent.insertBefore(newEls[i], afterEl);
+        }
+    }
+    function insertAfterElement(refEl, content) {
+        var newEls = normalizeContent(content);
+        var afterEl = refEl.nextSibling || null;
+        for (var i = 0; i < newEls.length; i++) {
+            refEl.parentNode.insertBefore(newEls[i], afterEl);
+        }
+    }
+    function normalizeContent(content) {
+        var els;
+        if (typeof content === 'string') {
+            els = htmlToElements(content);
+        }
+        else if (content instanceof Node) {
+            els = [content];
+        }
+        else { 
+            els = Array.prototype.slice.call(content);
+        }
+        return els;
+    }
+    function removeElement(el) {
+        if (el.parentNode) {
+            el.parentNode.removeChild(el);
+        }
+    }
+    
+    
+    
+    var matchesMethod = Element.prototype.matches ||
+        Element.prototype.matchesSelector ||
+        Element.prototype.msMatchesSelector;
+    var closestMethod = Element.prototype.closest || function (selector) {
+        
+        var el = this;
+        if (!document.documentElement.contains(el)) {
+            return null;
+        }
+        do {
+            if (elementMatches(el, selector)) {
+                return el;
+            }
+            el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
+    };
+    function elementClosest(el, selector) {
+        return closestMethod.call(el, selector);
+    }
+    function elementMatches(el, selector) {
+        return matchesMethod.call(el, selector);
+    }
+    
+    
+    function findElements(container, selector) {
+        var containers = container instanceof HTMLElement ? [container] : container;
+        var allMatches = [];
+        for (var i = 0; i < containers.length; i++) {
+            var matches = containers[i].querySelectorAll(selector);
+            for (var j = 0; j < matches.length; j++) {
+                allMatches.push(matches[j]);
+            }
+        }
+        return allMatches;
+    }
+    
+    
+    function findChildren(parent, selector) {
+        var parents = parent instanceof HTMLElement ? [parent] : parent;
+        var allMatches = [];
+        for (var i = 0; i < parents.length; i++) {
+            var childNodes = parents[i].children; 
+            for (var j = 0; j < childNodes.length; j++) {
+                var childNode = childNodes[j];
+                if (!selector || elementMatches(childNode, selector)) {
+                    allMatches.push(childNode);
+                }
+            }
+        }
+        return allMatches;
+    }
+    
+    
+    function forceClassName(el, className, bool) {
+        if (bool) {
+            el.classList.add(className);
+        }
+        else {
+            el.classList.remove(className);
+        }
+    }
+    
+    
+    var PIXEL_PROP_RE = /(top|left|right|bottom|width|height)$/i;
+    function applyStyle(el, props) {

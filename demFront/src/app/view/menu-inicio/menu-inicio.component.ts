@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'menu-inicio',
@@ -10,6 +11,8 @@ export class MenuInicioComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
+
 
 }
