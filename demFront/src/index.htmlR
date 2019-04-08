@@ -8,11 +8,11 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/css/calendario.css" >
   <link rel="stylesheet" href="assets/css/calendario.css" >
+  <script src='assets/js/calendario.js'></script>
+  <script src='assets/js/agenda.js'></script>
   <base href="/">
 </head>
 <body>
   <app-root></app-root>
-  <script src='assets/js/calendario.js'></script>
-  <script src='assets/js/agenda.js'></script>
 </body>
 </html>
