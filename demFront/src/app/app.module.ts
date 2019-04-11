@@ -15,29 +15,37 @@ import { MenuPagoComponent } from './view/menu-pago/menu-pago.component';
 import { CalendarioComponent } from './component/calendario/calendario.component';
 import { ListaComponent } from './component/lista/lista.component';
 import { MenuComponent } from './component/menu/menu.component';
+import { MenuRegistroComponent } from './view/menu-registro/menu-registro.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+//services
+import { DataApiService }  from './services/data-api.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
     LoginComponent,
-    MenuAgendaComponent,
     MenuAjustesComponent,
     MenuInicioComponent,
     MenuPacientesComponent,
     MenuPagoComponent,
+    MenuAgendaComponent,
     CalendarioComponent,
     ListaComponent,
     MenuComponent,
+    MenuRegistroComponent,
   ],
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     routing,
     DataTablesModule,
+    FormsModule,
   ],
   providers: [
-    RoutingProviders
+    RoutingProviders,
+    DataApiService,
   ],
   bootstrap: [AppComponent]
 })

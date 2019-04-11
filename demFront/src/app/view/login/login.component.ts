@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'login',
+  selector: 'menu-agenda',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
