@@ -1,51 +1,58 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { routing, RoutingProviders} from './app.routing';
-import { DataTablesModule } from 'angular-datatables';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
+
+import { routing, RoutingProviders} from './app.routing';
 import { AppComponent } from './app.component';
-import { ErrorComponent } from './view/error/error.component';
-import { LoginComponent } from './view/login/login.component';
-import { MenuAgendaComponent } from './view/menu-agenda/menu-agenda.component';
-import { MenuAjustesComponent } from './view/menu-ajustes/menu-ajustes.component';
-import { MenuInicioComponent } from './view/menu-inicio/menu-inicio.component';
-import { MenuPacientesComponent } from './view/menu-pacientes/menu-pacientes.component';
-import { MenuPagoComponent } from './view/menu-pago/menu-pago.component';
-import { CalendarioComponent } from './component/calendario/calendario.component';
-import { ListaComponent } from './component/lista/lista.component';
-import { MenuComponent } from './component/menu/menu.component';
-import { MenuRegistroComponent } from './view/menu-registro/menu-registro.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegisterComponent } from './components/user/register/register.component';
+import { Page404Component } from './components/page404/page404.component';
+import { MenuAjustesComponent } from './components/menu-ajustes/menu-ajustes.component';
+import { MenuPacientesComponent } from './components/menu-pacientes/menu-pacientes.component';
+import { MenuPagoComponent } from './components/menu-pago/menu-pago.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
+import { ListaComponent } from './components/lista/lista.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+
 //services
-import { DataApiService }  from './services/data-api.service';
+import { DataApiService } from 'src/app/services/data-api.service';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent,
+    HomeComponent,
+    NavbarComponent,
     LoginComponent,
+    RegisterComponent,
+    Page404Component,
     MenuAjustesComponent,
-    MenuInicioComponent,
     MenuPacientesComponent,
     MenuPagoComponent,
-    MenuAgendaComponent,
     CalendarioComponent,
-    ListaComponent,
-    MenuComponent,
-    MenuRegistroComponent,
+    ListaComponent
   ],
   imports: [
     BrowserModule,
-    MDBBootstrapModule.forRoot(),
     routing,
-    DataTablesModule,
+    HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [
-    RoutingProviders,
     DataApiService,
+    RoutingProviders
   ],
   bootstrap: [AppComponent]
 })

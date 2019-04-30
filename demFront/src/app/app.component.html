@@ -1,21 +1,3 @@
-<div style="text-align:center">
-
-<nav>
-  <a [routerLink]="['/login']" [routerLinkActive]="['active']">Login</a>
-  &nbsp;
-  <a [routerLink]="['/registro']" [routerLinkActive]="['active']">Registro</a>
-  &nbsp;
-  <a [routerLink]="['/inicio']" [routerLinkActive]="['active']">menu inicio</a>
-  &nbsp;
-  <a [routerLink]="['inicio/ajustes']" [routerLinkActive]="['active']">menu ajustes</a>
-  &nbsp;
-  <a [routerLink]="['inicio/agenda']" [routerLinkActive]="['active']">menu agenda</a>
-  &nbsp;
-  <a [routerLink]="['inicio/paciente']" [routerLinkActive]="['active']">menu pacientes</a>
-  &nbsp;
-  <a [routerLink]="['inicio/pago']" [routerLinkActive]="['active']">menu pago</a>
-</nav>
-
-
+<div id="container-princ" class="container-fluid">
 <router-outlet></router-outlet>
-
+</div>

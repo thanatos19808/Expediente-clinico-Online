@@ -3,21 +3,17 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-bootstrap-md-app": {
+    "angular-bootstrap-template": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss"
-        }
-      },
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-bootstrap-md-app",
+            "outputPath": "dist/angular-bootstrap-template",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,26 +23,15 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/jquery/dist/jquery.js",
-              "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/datatables.net/js/jquery.dataTables.min.js",
-              "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js",
-              "node_modules/datatables.net-responsive/js/dataTables.responsive.min.js",
-              "src/assets/js/responsive.bootstrap.min.js"
-
-            ]
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -78,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-bootstrap-md-app:build"
+            "browserTarget": "angular-bootstrap-template:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-bootstrap-md-app:build:production"
+              "browserTarget": "angular-bootstrap-template:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-bootstrap-md-app:build"
+            "browserTarget": "angular-bootstrap-template:build"
           }
         },
         "test": {
@@ -100,7 +85,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": [],
             "assets": [
@@ -123,7 +108,7 @@
         }
       }
     },
-    "angular-bootstrap-md-app-e2e": {
+    "angular-bootstrap-template-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -132,11 +117,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-bootstrap-md-app:serve"
+            "devServerTarget": "angular-bootstrap-template:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-bootstrap-md-app:serve:production"
+              "devServerTarget": "angular-bootstrap-template:serve:production"
             }
           }
         },
@@ -150,42 +135,7 @@
           }
         }
       }
-    },
-    "angular-bootstrap-md": {
-      "root": "projects/angular-bootstrap-md",
-      "sourceRoot": "projects/angular-bootstrap-md/src",
-      "projectType": "library",
-      "prefix": "mdb",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/angular-bootstrap-md/tsconfig.lib.json",
-            "project": "projects/angular-bootstrap-md/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/angular-bootstrap-md/src/test.ts",
-            "tsConfig": "projects/angular-bootstrap-md/tsconfig.spec.json",
-            "karmaConfig": "projects/angular-bootstrap-md/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/angular-bootstrap-md/tsconfig.lib.json",
-              "projects/angular-bootstrap-md/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
-  "defaultProject": "angular-bootstrap-md-app"
+  "defaultProject": "angular-bootstrap-template"
 }

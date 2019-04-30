@@ -1,33 +1,32 @@
 // modulos de router de angular
 import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-
+  
 //componentes
-import { LoginComponent} from './view/login/login.component';
-import { MenuAgendaComponent} from './view/menu-agenda/menu-agenda.component';
-import { MenuAjustesComponent} from './view/menu-ajustes/menu-ajustes.component';
-import { MenuInicioComponent} from './view/menu-inicio/menu-inicio.component';
-import { MenuPacientesComponent} from './view/menu-pacientes/menu-pacientes.component';
-import { MenuPagoComponent} from './view/menu-pago/menu-pago.component';
-import { ErrorComponent} from './view/error/error.component';
-import { MenuRegistroComponent} from './view/menu-registro/menu-registro.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegisterComponent } from './components/user/register/register.component';
+import { Page404Component } from './components/page404/page404.component';
+import { MenuAjustesComponent } from './components/menu-ajustes/menu-ajustes.component';
+import { MenuPacientesComponent } from './components/menu-pacientes/menu-pacientes.component';
+import { MenuPagoComponent } from './components/menu-pago/menu-pago.component';
+import { AuthGuard } from './guards/auth.guard';
 
 //Array de Rutas
 const appRoutes: Routes = [
     {path: '', component: LoginComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'registro', component: MenuRegistroComponent},
-    {path: 'inicio', component: MenuInicioComponent},
-    {path: 'inicio/agenda', component: MenuAgendaComponent},
-    {path: 'inicio/ajustes', component: MenuAjustesComponent},
-    {path: 'inicio/paciente', component: MenuPacientesComponent},
-    {path: 'inicio/pago', component: MenuPagoComponent},
-    {path: 'inicio/registro', component: MenuRegistroComponent},
-    {path: '**', component: ErrorComponent}
+    {path: 'registro', component: RegisterComponent},
+    {path: 'inicio', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: 'inicio/agenda', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: 'inicio/ajustes', component: MenuAjustesComponent, canActivate: [AuthGuard]},
+    {path: 'inicio/paciente', component: MenuPacientesComponent, canActivate: [AuthGuard]},
+    {path: 'inicio/pago', component: MenuPagoComponent, canActivate: [AuthGuard]},
+    {path: '**', component: Page404Component}
 ];
+
 
 // exportar modulo de router
 export const RoutingProviders: any[] = [];
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
-
 

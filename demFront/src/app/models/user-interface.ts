@@ -1,6 +1,7 @@
-export interface UserInterface {
-    id?: string;
+export interface UserInterface{
     name?: string;
-    email?: string;
     password?: string;
-  }
+    password2?: string;
+    email?: string;
+    token?: string;
+}
