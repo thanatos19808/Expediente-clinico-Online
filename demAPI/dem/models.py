@@ -5,12 +5,13 @@ class Doctor(models.Model):
     nombre = models.CharField(max_length=90,null=True, blank=False)
     apellido_paterno = models.CharField(max_length=45,null=True, blank=False)
     apellido_materno = models.CharField(max_length=45,null=True, blank=False)
-    sexo = models.CharField(max_length=1,null=True, blank=False)
+    estatus = models.CharField(max_length=4,null=True, blank=True)
+    sexo = models.CharField(max_length=1,null=True, blank=True)
     correo = models.EmailField(max_length=45,null=True, blank=True)
     rfc = models.CharField(max_length=45,null=True, blank=True)
-    fecha_nacimiento = models.DateField(null=True, blank=False)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
     url_foto = models.CharField(max_length=90,null=True, blank=True)
-    cedula = models.CharField(max_length=8,null=True, blank=False)
+    cedula = models.CharField(max_length=8,null=True, blank=True)
     calle = models.CharField(max_length=90,null=True, blank=True)
     num_interior = models.CharField(max_length=10,null=True, blank=True)
     num_exterior = models.CharField(max_length=10,null=True, blank=True)
@@ -18,7 +19,6 @@ class Doctor(models.Model):
     cp = models.CharField(max_length=5,null=True, blank=True)
     estado = models.CharField(max_length=45,null=True, blank=True)
     municipio = models.CharField(max_length=45,null=True, blank=True)
-    Contraseña = models.CharField(max_length=45,null=True, blank=False)
 
     def __str__(self):
         return '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
@@ -31,7 +31,8 @@ class Paciente(models.Model):
     nombre = models.CharField(max_length=90,null=True, blank=False)
     apellido_paterno = models.CharField(max_length=45,null=True, blank=False)
     apellido_materno = models.CharField(max_length=45,null=True, blank=False)
-    sexo = models.CharField(max_length=1,null=True, blank=False)
+    estatus = models.CharField(max_length=4,null=True, blank=True)
+    sexo = models.CharField(max_length=1,null=True, blank=True)
     correo = models.EmailField(max_length=45,null=True, blank=True)
     rfc = models.CharField(max_length=45,null=True, blank=True)
     fecha_nacimiento = models.DateField(null=True, blank=True)
@@ -40,7 +41,7 @@ class Paciente(models.Model):
     notas = models.CharField(max_length=200,null=True, blank=True)
     url_arch_priv = models.CharField(max_length=90,null=True, blank=True)
     antecedentes_principales = models.CharField(max_length=200,null=True, blank=True)
-    tipo_sangre = models.CharField(max_length=3,null=True, blank=False)
+    tipo_sangre = models.CharField(max_length=3,null=True, blank=True)
     calle = models.CharField(max_length=90,null=True, blank=True)
     num_interior = models.CharField(max_length=10,null=True, blank=True)
     num_exterior = models.CharField(max_length=10,null=True, blank=True)
@@ -82,12 +83,13 @@ class Asistente(models.Model):
     nombre = models.CharField(max_length=90,null=True, blank=False)
     apellido_paterno = models.CharField(max_length=45,null=True, blank=False)
     apellido_materno = models.CharField(max_length=45,null=True, blank=False)
-    sexo = models.CharField(max_length=1,null=True, blank=False)
+    estatus = models.CharField(max_length=4,null=True, blank=True)
+    sexo = models.CharField(max_length=1,null=True, blank=True)
     correo = models.EmailField(max_length=45,null=True, blank=True)
     rfc = models.CharField(max_length=45,null=True, blank=True)
     fecha_nacimiento = models.DateField(null=True, blank=True)
     url_foto = models.CharField(max_length=90,null=True, blank=True)
-    permisos = models.BooleanField(default=False,null=True, blank=False)
+    permisos = models.BooleanField(default=False,null=True, blank=True)
     calle = models.CharField(max_length=90,null=True, blank=True)
     num_interior = models.CharField(max_length=10,null=True, blank=True)
     num_exterior = models.CharField(max_length=10,null=True, blank=True)
@@ -95,7 +97,6 @@ class Asistente(models.Model):
     cp = models.CharField(max_length=5,null=True, blank=True)
     estado = models.CharField(max_length=45,null=True, blank=True)
     municipio = models.CharField(max_length=45,null=True, blank=True)
-    Contraseña = models.CharField(max_length=45,null=True, blank=False)
     Doctor = models.ForeignKey(Doctor, null=True, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -165,6 +166,7 @@ class Consultorio(models.Model):
 
 class Especialidad(models.Model):
     nombre_especialidad = models.CharField(max_length=45,null=True, blank=False)
+    nombre_sub_especialidad = models.CharField(max_length=45,null=True, blank=False)
     Doctor = models.ForeignKey(Doctor, null=True, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):

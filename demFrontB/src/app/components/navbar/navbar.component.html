@@ -1,0 +1,69 @@
+<body class="sidebar-is-reduced" >
+
+  <div class="c-header-nombre d-block d-sm-none b-c1">
+        <p>Dr. Ricardo Eliécer Neftalí Reyes Basoalto</p>
+  </div>
+  <div class="c-search d-sm-block d-md-none b-c2">
+        <input class="c-search__input u-input b-c3 c-c2" placeholder="Buscar paciente..." type="text"/>
+        <span class="fas fa fa-search fa-2x c-c2 bf-c2 bh-c5 ch-c3"></span>
+      </div>
+  <header class="l-header b-c2">
+    <div class="l-header__inner clearfix">
+      <div class="c-header-icon js-hamburger b-c2 bh-c5">
+        <div class="hamburger-toggle"><span class="bar-top"></span><span class="bar-mid"></span><span class="bar-bot"></span></div>
+      </div>      
+      <div class="c-search d-none d-md-block b-c2">
+        <input class="c-search__input u-input b-c3 c-c2" placeholder="Buscar paciente..." type="text"/>
+        <span class="fas fa fa-search fa-2x c-c2 bf-c1 bh-c5 ch-c3"></span>
+      </div>
+      <div class="c-header-nombre d-none d-sm-block b-c1">
+        <p>Dr. Ricardo Eliécer Neftalí<br>Reyes Basoalt|o</p>
+      </div>
+      <div class="c-img-dr">
+        <img class="img-fluid" src="../../../assets/img/placeholder-doctor.jpg">
+      </div>
+      <div class="header-icons-group">
+      <a href="#" (click)="onLogout()">
+        <div class="c-header-icon logout b-c3"><span class="fas fa fa-power-off fa-2x b-c1 bh-c4"></span></div>       
+      </a>
+      </div>
+    </div>
+  </header>
+  <div class="l-sidebar b-c2">
+    <div class="logo b-c3">
+    <a [routerLink]="['/inicio']" [routerLinkActive]="['active']">
+      <img src="../../../assets/img/placeholder.png">
+    </a>  
+    </div>
+    <div class="l-sidebar__content">
+      <nav class="c-menu js-menu">
+        <ul class="u-list">
+          <li class="c-menu__item is-active">
+            <div class="c-menu__item__inner b-c2"><a class="fas fa fa-2x fa-address-book c-c3" [routerLink]="['/inicio/agenda']" [routerLinkActive]="['active']"></a>
+              <a class="c-menu-item__title" [routerLink]="['/inicio/agenda']" [routerLinkActive]="['active']"><span class="c-c3">Agenda</span></a>
+            </div>
+          </li>
+          <li class="c-menu__item has-submenu">
+            <div class="c-menu__item__inner b-c2"><a class="fas fa fa-2x fa-users c-c3"  [routerLink]="['/inicio/paciente']" [routerLinkActive]="['active']" ></a>
+              <a class="c-menu-item__title" [routerLink]="['/inicio/paciente']" [routerLinkActive]="['active']" ><span class="c-c3">Pacientes</span></a>
+            </div>
+          </li>
+          <li class="c-menu__item has-submenu">
+            <div class="c-menu__item__inner b-c2"><a class="fas fa fa-2x fa-credit-card c-c3"  [routerLink]="['/inicio/pago']" [routerLinkActive]="['active']"></a>
+              <a class="c-menu-item__title" [routerLink]="['/inicio/pago']" [routerLinkActive]="['active']"><span class="c-c3">Pagos</span></a>
+            </div>
+          </li>
+          <li class="c-menu__item has-submenu">
+            <div class="c-menu__item__inner b-c2"><a class="fas fa fa-2x fa-cogs c-c3"  [routerLink]="['/inicio/ajustes']" [routerLinkActive]="['active']"></a>
+              <a class="c-menu-item__title" [routerLink]="['/inicio/ajustes']" [routerLinkActive]="['active']"><span class="c-c3">Ajustes</span></a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+<div class="l-main">
+  <div class="content-wrapper content-wrapper--with-bg">    
+  </div>
+</div>
+</body>

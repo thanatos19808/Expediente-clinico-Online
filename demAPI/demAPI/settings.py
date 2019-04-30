@@ -20,6 +20,7 @@ ALLOWED_HOSTS = ['104.248.176.189']
 
 INSTALLED_APPS = [
     'rest_framework',
+    'corsheaders',
     'rest_framework.authtoken',
     'django.contrib.sites',
     'rest_auth',
@@ -41,11 +42,25 @@ INSTALLED_APPS = [
 SITE_ID = 1
 #Registro simple sin correo
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#Login con correo
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+#Following is added to enable registration with email instead of username
+AUTHENTICATION_BACKENDS = (
+ # Needed to login by username in Django admin, regardless of `allauth`
+ "django.contrib.auth.backends.ModelBackend",
+
+ # `allauth` specific authentication methods, such as login by e-mail
+ "allauth.account.auth_backends.AuthenticationBackend",
+)
+
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -118,6 +133,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
+
+
+MIDDLEWARE_CLASSES = {
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+}
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 

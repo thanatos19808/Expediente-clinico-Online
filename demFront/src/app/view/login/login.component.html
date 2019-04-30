@@ -1,45 +1,30 @@
-<body>
-	<nav class="container">
-		<div class="row">
-			<div class="col-lg-3">
-				<a id="logo" class="py-3 px-1"><img class="img-fluid" src="../../../assets/img/logo.png" alt="Top Medical"></a>
-			</div>
-		</div>
-	</nav>
-	<div class="row mt-3">
-		<div class="col-lg-4 col-sm-6 offset-lg-4 offset-sm-3">
-			<div class="login-html px-3 py-3">
-				<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Entrar</label>
-				<input id="tab-2" type="radio" name="tab" class="for-pwd"><label for="tab-2" class="tab">Olvidé mi contraseña</label>
-				<div class="login-form mt-4">
-					<div class="sign-in-htm">
-						<div class="group">
-							<label for="user" class="label">Usuario</label>
-							<span class="fas fa-user fa-2x"></span>
-							<input id="user" type="text" class="input">
-						</div>
-						<div class="group">
-							<label for="pass" class="label">Contraseña</label>
-							<span class="fas fa-key fa-2x"></span>
-							<input id="pass" type="password" class="input" data-type="password">
-						</div>
-						<div class="group">
-							<input type="submit" class="button" value="Entrar">
-						</div>
-					</div>
-					<div class="for-pwd-htm">
-						<div class="group">
-							<label for="user" class="label">Usuario o Email</label>
-							<span class="fas fa-user fa-2x"></span>
-							<input id="user" type="text" class="input">
-						</div>
-						<div class="group">
-							<input type="submit" class="button" value="Restablecer Contraseña">
-						</div>				
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</body>
+<section id="login" class="mb-5 mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+        <div class="card_login">
+          <div class="card">
+            <div class="card-body text-center">
+              <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
+                <h1 class="h3 mb-3 font-weight-normal" *ngIf="!isError">Login</h1>
+                <div class="alert alert-danger" role="alert" *ngIf="isError">
+                  Something is wrong!
+                </div>
+                <div class="form-group">
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="user.password"
+                    required>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+                <div class="form-group">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
