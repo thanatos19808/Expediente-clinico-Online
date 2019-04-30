@@ -1,3 +1,4 @@
+
 .base {padding: 80px;display: block; }
 @media (max-width: 575px) {
     .base {width: 100%; position:absolute; top: 160px; left: 0; margin-left: 0 10px; padding: 0!important;}
