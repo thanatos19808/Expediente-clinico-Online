@@ -13,22 +13,28 @@ export class LoginComponent implements OnInit {
   constructor(private authService:AuthService, private router: Router) { }
   private user: UserInterface = {
     email: "",
-    password: "",
-    token: ""
+    password: ""
   };
 
-  ngOnInit() {}
-    onLogin(){
-      return this.authService.loginuser(this.user.email, this.user.password)
-      .subscribe(
-        data =>{
-          console.log(this.user.email);
-          console.log(this.user.password);
-          this.user.token = data.key;
-          this.authService.setInterface(this.user);
-          this.router.navigate(['/inicio']);
-        },
-        error => console.log(error)
-      );
+  ngOnInit() {
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("accessToken");
+  }
+    
+  onLogin(){
+    return this.authService.loginuser(this.user.email, this.user.password)
+    .subscribe(
+      data =>{
+        this.authService.setInterface(this.user);
+        this.authService.setToken(data.key);
+        this.router.navigate(['/inicio']);
+      },
+        error => this.mensajeError(error)
+    );
+  }
+
+  mensajeError(error){
+    alert("Error durante el login: " + error.statusText);
+    console.log(error.statusText);
   }
 }

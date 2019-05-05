@@ -30,7 +30,9 @@ export class RegisterComponent implements OnInit {
     .subscribe(user =>{
       //mensaje registro exito
       this.router.navigate(['/login']);
-    });
+    },
+    error => console.log(error)
+  );
   }
 
 }

@@ -46,6 +46,18 @@ export class AuthService {
       ).pipe(map(data => data));
   }
 
+  logoutuser(){
+    const url_api = 'http://104.248.176.189:8000/rest-auth/logout/';
+    var httpHeaders = {'Authorization': 'token '+localStorage.getItem("accessToken")};
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("accessToken");
+    return this.http
+    .post<UserInterface>
+    (url_api,
+      {},
+      {headers: httpHeaders },
+      ).pipe(map(data => data))
+  }
 
   setEmail(email): void{
     localStorage.setItem("email", email);
@@ -62,12 +74,12 @@ export class AuthService {
     }
   }
 
-  setToken(token): void{
-    localStorage.setItem("key", token);
+  setToken(token): void {
+    localStorage.setItem("accessToken", token);
   }
 
-  getToken(){
-    return localStorage.getItem("key");
+  getToken() {
+    return localStorage.getItem("accessToken");
   }
 
   setPassword(password): void{
@@ -82,22 +94,6 @@ export class AuthService {
     let user_string = JSON.stringify(user);
     localStorage.setItem("currentUser", user_string);
   }
-  
-  logoutUser(){
-    let currentUser = localStorage.getItem("user");
-    let currentPassword = localStorage.getItem("password");
-    const url_api = 'http://104.248.176.189:8000/rest-auth/logout/';
-    localStorage.removeItem("currentUser");
-    return this.http
-    .post<UserInterface>
-    (url_api,
-      {currentUser, currentPassword},
-      {headers: this.headers }
-      ).pipe(map(data => data));
-  }
-
-
-
 }
 
   

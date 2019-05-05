@@ -10,6 +10,7 @@ import { Page404Component } from './components/page404/page404.component';
 import { MenuAjustesComponent } from './components/menu-ajustes/menu-ajustes.component';
 import { MenuPacientesComponent } from './components/menu-pacientes/menu-pacientes.component';
 import { MenuPagoComponent } from './components/menu-pago/menu-pago.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthGuard } from './guards/auth.guard';
 
 //Array de Rutas
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     {path: 'inicio/ajustes', component: MenuAjustesComponent, canActivate: [AuthGuard]},
     {path: 'inicio/paciente', component: MenuPacientesComponent, canActivate: [AuthGuard]},
     {path: 'inicio/pago', component: MenuPagoComponent, canActivate: [AuthGuard]},
+    {path: 'nav', component: NavbarComponent},
     {path: '**', component: Page404Component}
 ];
 

@@ -19,11 +19,11 @@ export class DataApiService {
     "Content-Type": "aplication/json",
     Authorization: this.AuthService.getToken()
   });
- //demo
+
   getAllPacientes(){
     const url_api = 'http://104.248.176.189:8000/PacientesList/';
     return this.http
-      .post<PacienteInterface>(url_api, {headers: this.headers})
+      .post<PacienteInterface>(url_api, {headers: this.headers}) 
       .pipe(map(data => data));
   }
 }

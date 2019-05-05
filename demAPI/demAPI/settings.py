@@ -143,7 +143,6 @@ MIDDLEWARE_CLASSES = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 

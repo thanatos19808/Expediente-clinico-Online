@@ -3,5 +3,4 @@ export interface UserInterface{
     password?: string;
     password2?: string;
     email?: string;
-    token?: string;
 }

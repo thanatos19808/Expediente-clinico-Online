@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
-declare var $: any;
+import { UserInterface } from "../../models/user-interface";
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,51 +11,30 @@ declare var $: any;
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router: Router) { }
 
   ngOnInit() {
-    this.dashboard();
   }
 
-  onLogout():void{   
-    this.authService.logoutUser();
+  myFunction() {
+    var element = document.getElementById("body");
+    element.classList.toggle("sidebar-is-reduced");
+    element.classList.toggle("sidebar-is-expanded");
+    var element2 = document.getElementById("hamburger");
+    element2.classList.toggle("is-opened");
+ }
+ 
+  onLogout(){   
+    return this.authService.logoutuser()
+    .subscribe(
+      data =>{
+        this.router.navigate(['/login']);
+      },
+      error => console.log(error)
+    );
+    
   }
 
-  dashboard(){
-    var Dashboard = function () {
-      var global = {
-        menuClass: ".c-menu"
-      };
   
-      var menuChangeActive = function menuChangeActive(el) {
-        var hasSubmenu = $(el).hasClass("has-submenu");
-        $(global.menuClass + " .is-active").removeClass("is-active");
-        $(el).addClass("is-active");
-  
-        if (hasSubmenu) {
-        $(el).find("ul").slideDown();
-        }
-      };
-  
-      var sidebarChangeWidth = function sidebarChangeWidth() {
-        var $menuItemsTitle = $("li .menu-item__title");
-  
-        $("body").toggleClass("sidebar-is-reduced sidebar-is-expanded");
-        $(".hamburger-toggle").toggleClass("is-opened");
-      };
-  
-      return {
-        init: function init() {
-          $(".js-hamburger").on("click", sidebarChangeWidth);
-  
-          $(".js-menu li").on("click", function (e) {
-            menuChangeActive(e.currentTarget);
-          });
-        }
-      };
-    }();
-
-    Dashboard.init();
-  }
 
 }
